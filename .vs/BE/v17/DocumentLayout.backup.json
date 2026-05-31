@@ -1,0 +1,75 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{0421CB15-ABA9-7BE0-D708-C01FCA13F309}|BE.csproj|c:\\users\\farla\\onedrive\\documents\\makefile\\nom\\be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0421CB15-ABA9-7BE0-D708-C01FCA13F309}|BE.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0421CB15-ABA9-7BE0-D708-C01FCA13F309}|BE.csproj|c:\\users\\farla\\onedrive\\documents\\makefile\\nom\\be\\be.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{0421CB15-ABA9-7BE0-D708-C01FCA13F309}|BE.csproj|solutionrelative:be.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{0421CB15-ABA9-7BE0-D708-C01FCA13F309}|BE.csproj|c:\\users\\farla\\onedrive\\documents\\makefile\\nom\\be\\requesttracemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{0421CB15-ABA9-7BE0-D708-C01FCA13F309}|BE.csproj|solutionrelative:requesttracemiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BE",
+              "DocumentMoniker": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\BE.csproj",
+              "RelativeDocumentMoniker": "BE.csproj",
+              "ToolTip": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\BE.csproj",
+              "RelativeToolTip": "BE.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-05-17T16:42:26.326Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:41:05.747Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "RequestTraceMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\RequestTraceMiddleware.cs",
+              "RelativeDocumentMoniker": "RequestTraceMiddleware.cs",
+              "ToolTip": "C:\\Users\\farla\\OneDrive\\Documents\\makefile\\NOM\\BE\\RequestTraceMiddleware.cs",
+              "RelativeToolTip": "RequestTraceMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-05-17T16:41:03.792Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{cce594b6-0c39-4442-ba28-10c64ac7e89f}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
