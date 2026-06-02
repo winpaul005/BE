@@ -239,6 +239,8 @@ public class UsersDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Tasque> Tasks { get; set; }
     public DbSet<serverProps> Props { get; set; }
+    public DbSet<Admin> Admins { get; set; }
+    public DbSet<Log> Logs { get; set; }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Tasque>()

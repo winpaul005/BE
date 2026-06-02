@@ -15,8 +15,12 @@
     using Microsoft.AspNetCore.Http;
 
     using BE.Models;
-    namespace MyApp.Namespace
+using System.Text.Json.Serialization;
+namespace MyApp.Namespace
     {
+
+
+
     [ApiController]
     [Route("api/[controller]")]
     public class AuthController : Controller
@@ -44,6 +48,14 @@
         [HttpPost("register")]
             public IActionResult Register([FromBody] LoginModel login)
             {
+                JsonSerializerOptions _jsonSerializerOptions = new()
+                {
+                    PropertyNameCaseInsensitive = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                    WriteIndented = true,
+                    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                };
                 var hasher = new PasswordHasher<User>();
                 var _usr = _context.Users.ToList().FirstOrDefault(x => x.username == login.username);
                 System.Console.WriteLine(hasher.HashPassword(_usr,login.passwd));
@@ -74,6 +86,7 @@
         [HttpPost("login")]
             public IActionResult Login([FromBody] LoginModel login)
             {
+
                 var hasher = new PasswordHasher<User>();
                 User? _usr;
             try
@@ -98,7 +111,12 @@
                 if(_usr!=null)
                 {
                     var hashCheck = hasher.VerifyHashedPassword(_usr, _usr.passwdhash, login.passwd);
-                    if (hashCheck == PasswordVerificationResult.Success)
+                    //double check (if user is not an admin then it will pass anyway)
+                    Admin? usrAdminCheck = _context.Admins.ToList().FirstOrDefault(x=>x.id==_usr.id);
+                    bool adminDoubleCheck = (_usr.id==(usrAdminCheck!=null?usrAdminCheck.id:-1)) || (_usr.role == 0); 
+                    System.Console.WriteLine(usrAdminCheck.id + " | "+_usr.id + " | "+adminDoubleCheck);
+
+                    if (hashCheck == PasswordVerificationResult.Success && adminDoubleCheck)
                     {
                         _cache.Set(login.username,_usr,new MemoryCacheEntryOptions().SetAbsoluteExpiration(TimeSpan.FromMinutes(5)));
                         _redisCache.SetString(_usr.id.ToString(),JsonSerializer.Serialize(_usr),new DistributedCacheEntryOptions

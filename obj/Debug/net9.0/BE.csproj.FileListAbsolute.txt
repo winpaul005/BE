@@ -228,3 +228,4 @@ C:\Users\farla\OneDrive\Documents\makefile\NOM\KursBundle\BE\bin\Debug\net9.0\zh
 C:\Users\farla\OneDrive\Documents\makefile\NOM\KursBundle\BE\bin\Debug\net9.0\OpenTelemetry.Exporter.Prometheus.HttpListener.dll
 C:\Users\farla\OneDrive\Documents\makefile\NOM\KursBundle\BE\bin\Debug\net9.0\OpenTelemetry.Exporter.Prometheus.AspNetCore.dll
 C:\Users\farla\OneDrive\Documents\makefile\NOM\KursBundle\BE\bin\Debug\net9.0\OpenTelemetry.Instrumentation.Runtime.dll
+C:\Users\farla\OneDrive\Documents\makefile\NOM\KursBundle\BE\obj\Debug\net9.0\BE.sourcelink.json

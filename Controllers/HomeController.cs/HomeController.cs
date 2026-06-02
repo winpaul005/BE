@@ -8,6 +8,7 @@ using BE.Models;
 using System.Security.Claims;
 using System.Text.Json;
 using System.Diagnostics.Metrics;
+using System.Text.Json.Serialization;
 namespace MyApp.Namespace
 {
 [ApiController]
@@ -42,10 +43,94 @@ namespace MyApp.Namespace
         return Ok(_context.Tasks);
     }
     [HttpGet]
+    [Route("getAvatar")]
+    [Authorize(Roles = "User")]
+    public IActionResult GetAvatar()
+    {
+                JsonSerializerOptions _jsonSerializerOptions = new()
+                {
+                    PropertyNameCaseInsensitive = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                    WriteIndented = true,
+                    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                };
+        int usrname = int.Parse(User.Identity?.Name);
+        User? _usr;
+        if(usrname!=null)
+        {
+            _usr = _context.Users.First(x => x.id == usrname);
+            if(_usr!=null)
+            {
+                UserStatus? _status = JsonSerializer.Deserialize<UserStatus>(_usr.status, _jsonSerializerOptions);
+                return Ok(_status.avatarString);
+                
+            }
+            return NotFound();
+        }
+        return NotFound();
+        
+    }
+    [HttpPost]
+    [Route("setAvatar")]
+    [Authorize(Roles = "User")]
+    public IActionResult SetAvatar(string _encodedImage)
+    {
+                JsonSerializerOptions _jsonSerializerOptions = new()
+                {
+                    PropertyNameCaseInsensitive = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                    WriteIndented = true,
+                    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                };
+        int usrname = int.Parse(User.Identity?.Name);
+        User? _usr;
+        if(usrname!=null)
+        {
+            _usr = _context.Users.First(x => x.id == usrname);
+            if(_usr!=null)
+            {
+                UserStatus? _status = JsonSerializer.Deserialize<UserStatus>(_usr.status, _jsonSerializerOptions);
+                _status.avatarString = _encodedImage;
+                _usr.status = JsonSerializer.Serialize<UserStatus>(_status,_jsonSerializerOptions);
+                _context.Entry(_usr).Property(x => x.status).IsModified = true;
+                _context.SaveChanges();
+                return Ok(_status.avatarString);
+                
+            }
+            return NotFound();
+        }
+        return NotFound();
+        
+    }
+
+    public void AddLog(Log _log)
+        {
+            System.Console.WriteLine("New log!");
+            _context.Logs.Add(_log);
+            _context.SaveChanges();
+        }
+    [HttpGet]
+    [Route("getLogs")]
+    [Authorize(Roles = "Administrator")]
+    public IActionResult GetLogs()
+        {
+            return Ok(_context.Logs.ToList());
+        }
+    [HttpGet]
     [Route("addCounter")]
     [Authorize(Roles = "User")]
     public IActionResult AddCounter()
     {
+                JsonSerializerOptions _jsonSerializerOptions = new()
+                {
+                    PropertyNameCaseInsensitive = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull,
+                    WriteIndented = true,
+                    DictionaryKeyPolicy = JsonNamingPolicy.CamelCase
+                };
         int usrname = int.Parse(User.Identity?.Name);
         User? _usr;
         if(usrname!=null)
@@ -53,8 +138,8 @@ namespace MyApp.Namespace
                 _usr = _context.Users.First(x => x.id == usrname);
                 if(_usr!=null)
                 {
-                    UserStatus? _status = JsonSerializer.Deserialize<UserStatus>(_usr.status);
-                    _usr.status = _status!=null? JsonSerializer.Serialize<UserStatus>(new UserStatus(){completedTasks = _status.completedTasks+1}) : JsonSerializer.Serialize<UserStatus>(new UserStatus());
+                    UserStatus? _status = JsonSerializer.Deserialize<UserStatus>(_usr.status, _jsonSerializerOptions);
+                    _usr.status = _status!=null? JsonSerializer.Serialize<UserStatus>(new UserStatus(){completedTasks = _status.completedTasks+1},_jsonSerializerOptions) : JsonSerializer.Serialize<UserStatus>(new UserStatus(),_jsonSerializerOptions);
                     _context.Entry(_usr).Property(x => x.status).IsModified = true;
                     _context.SaveChanges();
                     return Ok(_usr.status);
@@ -69,6 +154,7 @@ namespace MyApp.Namespace
     {
         _context.Tasks.Add(_task);
         _context.SaveChanges();
+        AddLog(new Log(){message = $"New task (id {_task.id} : {_task.title}) was added by {_context.Users.ToList().FirstOrDefault(x=>x.id==_task.ownerid).username}"});
         return Ok(_context.Tasks);
     }
         [HttpPost]
@@ -105,6 +191,7 @@ namespace MyApp.Namespace
                             
                             // Use the metrics class instead
                             TaskMetrics.TasksCompleted.Add(1);
+                            AddLog(new Log(){message = $"User {userId} finished the task {_tsk.id}"});
                             
                             return Ok(_context.Tasks);
                         }
@@ -126,6 +213,8 @@ namespace MyApp.Namespace
             _context.Tasks.Remove(_task);
             _context.Props.ToList()[0].completedtasks -=1;
             _context.SaveChanges();
+            AddLog(new Log(){message = $"Task {taskId} was deleted"});
+
             return Ok();
         }
         return NotFound();

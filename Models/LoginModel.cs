@@ -1,5 +1,8 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json;
+using System.ComponentModel;
+
 
 namespace BE.Models;
 //all the stuff for login n stuff
@@ -28,9 +31,13 @@ public class User
     [StringLength(60)]
     public string passwdhash {get;set;}
     public int role {get;set;}
+    [Column(TypeName = "jsonb")]
     public string status {get;set;}
 }
+
 public class UserStatus
 {
     public int completedTasks {get;set;}
+    [DefaultValue("/")]            
+    public string avatarString {get;set;}
 }

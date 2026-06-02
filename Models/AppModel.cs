@@ -1,9 +1,12 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
+using System.Text.Json;
 
 
 namespace BE.Models;
+
+
 
 [Table("tasks_table")]
 public class Tasque
@@ -21,6 +24,20 @@ public class Tasque
     //среди деталей: кому назначено, и  статус выполнения
     [Column(TypeName = "jsonb")]
     public TasqueStatus? status {get; set;}
+}
+
+[Table("admins")]
+public class Admin
+{
+    [Key]
+    public int id { get; set; }
+}
+[Table("logs")]
+public class Log
+{
+    [Key]
+    public int id { get; set; }
+    public string message {get;set;}
 }
 [Table("server_properties")]
 public class serverProps
