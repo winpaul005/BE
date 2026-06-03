@@ -12,6 +12,7 @@ This is a BackEnd server application for the Tasque Manager web app (Frontend av
    > SERVER={SERVERADDRESS};DATABASE={TARGETDATABASE};UID={ADMINUSERNAME;PWD={ADMINPASSWD};
 4. Apply migrations:
    > dotnet ef migrations add Initial
+   
    > dotnet ef database update
 5. Run server:
    > dotnet run dev
